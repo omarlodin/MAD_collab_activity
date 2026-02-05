@@ -9,26 +9,41 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  ThemeData _theme = ThemeData(
+    colorSchemeSeed: Colors.blue,
+    useMaterial3: true,
+  );
+
+  void _setTheme(Color seed) {
+    setState(() {
+      _theme = ThemeData(colorSchemeSeed: seed, useMaterial3: true);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // TIP: The MaterialApp wraps your whole app and sets theme + navigation.
-      // Only edit text/colors below unless instructed otherwise.
-      // TASK 1: Change the title of the app
-      // 👉 Replace the string below with your own app title (example: 'Flutter Team Challenge').
       title: 'The Great Collab Project',
-      theme: ThemeData(
-        // TASK 2: Change the primary swatch color
-        // 👉 Pick one Material color from Colors (example: Colors.red, Colors.green, Colors.purple).
-        primarySwatch:  Colors.purple,
+      theme: _theme,
+      home: HomePage(
+        onTheme: _setTheme,
       ),
-      home: HomePage(),
     );
   }
 }
 
+
 class HomePage extends StatelessWidget {
+  final void Function(Color) onTheme;
+
+  const HomePage({super.key, required this.onTheme});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,13 +55,33 @@ class HomePage extends StatelessWidget {
       ),
       body: Center(
         child: Column(
+          
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            // TIP: Widgets appear in order from top to bottom.
-            // If something doesn't show, make sure commas and parentheses match.
-            // TASK 4: Change the main text below
-            // 👉 Update this main headline to describe your app.
-            Text(
+          children: [
+            const Text('Choose a theme:'),
+
+            const SizedBox(height: 12),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () => onTheme(Colors.blue),
+                  child: const Text('Blue'),
+                ),
+                const SizedBox(width: 10),
+                ElevatedButton(
+                  onPressed: () => onTheme(Colors.green),
+                  child: const Text('Green'),
+                ),
+                const SizedBox(width: 10),
+                ElevatedButton(
+                  onPressed: () => onTheme(Colors.purple),
+                  child: const Text('Purple'),
+                ),
+              ],
+            ),
+          Text(
               'This is an app that has tabs',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
@@ -100,34 +135,10 @@ class HomePage extends StatelessWidget {
               
               )
               )
-            // TASK 7: Add a new Text widget below (after this comment)
-            // 👉 Add a new Text widget here. Example:
-            // Text('Created by: [Your Name]')
-            // Tip: Use a smaller font or italic style for a signature line.
-            // Example with styling:
-            // Text(
-            //   'Created by: [Your Name]",
-            //   style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic, color: Colors.grey),
-            // ),
+          
           ],
         ),
       ),
     );
   }
 }
-
-// TASK 8: Modify the ElevatedButton above to add custom styling
-// Add this inside the ElevatedButton (after child parameter):
-// style: ElevatedButton.styleFrom(
-//   backgroundColor: Colors.green,
-// ),
-// 👉 Example full snippet:
-// ElevatedButton(
-//   onPressed: () {},
-//   child: Text('Click Me'),
-//   style: ElevatedButton.styleFrom(
-//     backgroundColor: Colors.green,
-//     foregroundColor: Colors.white,
-//   ),
-// ),
-// TIP: Keep the button inside the Column so it shows in the center.
