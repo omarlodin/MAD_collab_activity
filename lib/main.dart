@@ -68,6 +68,29 @@ class HomePage extends StatelessWidget {
               child: Text('Perform action'),
               style: ElevatedButton.styleFrom(backgroundColor: Colors.green, foregroundColor: Colors.white)
             ),
+            Card(
+              elevation: 4,
+              margin: EdgeInsets.all(16),
+              child: Padding(
+              padding: EdgeInsets.all(16),
+              child: Row(
+              children: [
+                  Icon(Icons.account_circle, size: 50, color: Colors.pink),
+                    SizedBox(width: 16),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Omar Lodin', 
+                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                                Text('Major: Computer Science', 
+                                  style: TextStyle(color: Colors.grey)),
+                                    ],
+                              ),
+                          ],
+                          ),
+                            ),
+            ),
+
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
