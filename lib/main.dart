@@ -17,11 +17,11 @@ class MyApp extends StatelessWidget {
       // Only edit text/colors below unless instructed otherwise.
       // TASK 1: Change the title of the app
       // 👉 Replace the string below with your own app title (example: 'Flutter Team Challenge').
-      title: 'My First Flutter App',
+      title: 'The Great Collab Project',
       theme: ThemeData(
         // TASK 2: Change the primary swatch color
         // 👉 Pick one Material color from Colors (example: Colors.red, Colors.green, Colors.purple).
-        primarySwatch: Colors.blue,
+        primarySwatch:  Colors.purple,
       ),
       home: HomePage(),
     );
@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         // TASK 3: Change the text in the top bar
         // 👉 Replace the AppBar title text with your team name or app name.
-        title: Text('Welcome to Class'),
+        title: Text('MAD collab activity'),
       ),
       body: Center(
         child: Column(
@@ -47,14 +47,14 @@ class HomePage extends StatelessWidget {
             // TASK 4: Change the main text below
             // 👉 Update this main headline to describe your app.
             Text(
-              'Hello, Flutter!',
+              'This is an app that has tabs',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 20), // Adds space between widgets
             // TASK 5: Change the subtitle text
             // 👉 Update this smaller subtitle with a brief description.
             Text(
-              'This is my first modification.',
+              'You can click a button here',
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
             SizedBox(height: 20),
@@ -65,8 +65,18 @@ class HomePage extends StatelessWidget {
               },
               // TASK 6: Change the text on the button
               // 👉 Replace the button text with an action label (example: 'Show Info').
-              child: Text('Click Me'),
+              child: Text('Perform action'),
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.green, foregroundColor: Colors.white)
             ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+              },
+              child: Text('Created by: Omar Lodin',
+              style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic, color: Colors.grey)
+              
+              )
+              )
             // TASK 7: Add a new Text widget below (after this comment)
             // 👉 Add a new Text widget here. Example:
             // Text('Created by: [Your Name]')
