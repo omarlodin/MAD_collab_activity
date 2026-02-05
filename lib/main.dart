@@ -3,6 +3,9 @@
 // Replace your entire lib/main.dart file with this code
 
 import 'package:flutter/material.dart';
+import 'dart:async';
+import 'dart:math';
+
 
 // The main entry point of the app
 void main() {
@@ -39,103 +42,171 @@ class _MyAppState extends State<MyApp> {
 }
 
 
-class HomePage extends StatelessWidget {
+
+class HomePage extends StatefulWidget {
   final void Function(Color) onTheme;
 
-  const HomePage({super.key, required this.onTheme});
+  const HomePage({
+    super.key,
+    required this.onTheme,
+  });
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final List<String> _quotes = [
+    'Small steps every day add up to big results.',
+    'Discipline beats motivation when motivation fades.',
+    'Done is better than perfect.',
+    'You don’t have to be great to start, but you have to start to be great.',
+    'Progress, not perfection.',
+    'Keep going — your future self will thank you.',
+  ];
+
+  final Random _rand = Random();
+  late String _currentQuote;
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentQuote = _quotes[_rand.nextInt(_quotes.length)];
+
+    _timer = Timer.periodic(
+      const Duration(seconds: 5),
+      (_) {
+        setState(() {
+          _currentQuote = _quotes[_rand.nextInt(_quotes.length)];
+        });
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // TIP: Scaffold gives you a page layout with appBar + body.
       appBar: AppBar(
-        // TASK 3: Change the text in the top bar
-        // 👉 Replace the AppBar title text with your team name or app name.
-        title: Text('MAD collab activity'),
+        title: const Text('MAD collab activity'),
       ),
       body: Center(
         child: Column(
-          
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text('Choose a theme:'),
-
             const SizedBox(height: 12),
-
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  onPressed: () => onTheme(Colors.blue),
+                  onPressed: () => widget.onTheme(Colors.blue),
                   child: const Text('Blue'),
                 ),
                 const SizedBox(width: 10),
                 ElevatedButton(
-                  onPressed: () => onTheme(Colors.green),
+                  onPressed: () => widget.onTheme(Colors.green),
                   child: const Text('Green'),
                 ),
                 const SizedBox(width: 10),
                 ElevatedButton(
-                  onPressed: () => onTheme(Colors.purple),
+                  onPressed: () => widget.onTheme(Colors.purple),
                   child: const Text('Purple'),
                 ),
               ],
             ),
-          Text(
+            const SizedBox(height: 20),
+            const Text(
               'This is an app that has tabs',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
             ),
-            SizedBox(height: 20), // Adds space between widgets
-            // TASK 5: Change the subtitle text
-            // 👉 Update this smaller subtitle with a brief description.
+            const SizedBox(height: 12),
             Text(
-              'You can click a button here',
-              style: TextStyle(fontSize: 16, color: Colors.grey),
+              '"$_currentQuote"',
+              style: const TextStyle(
+                fontSize: 14,
+                fontStyle: FontStyle.italic,
+                color: Colors.grey,
+              ),
+              textAlign: TextAlign.center,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
+            const Text(
+              'You can click a button here',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.grey,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 20),
             ElevatedButton(
-              // TIP: onPressed runs when the button is tapped.
               onPressed: () {
                 print('Button Clicked!');
               },
-              // TASK 6: Change the text on the button
-              // 👉 Replace the button text with an action label (example: 'Show Info').
-              child: Text('Perform action'),
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.green, foregroundColor: Colors.white)
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
+                foregroundColor: Colors.white,
+              ),
+              child: const Text('Perform action'),
             ),
             Card(
               elevation: 4,
-              margin: EdgeInsets.all(16),
+              margin: const EdgeInsets.all(16),
               child: Padding(
-              padding: EdgeInsets.all(16),
-              child: Row(
-              children: [
-                  Icon(Icons.account_circle, size: 50, color: Colors.pink),
-                    SizedBox(width: 16),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Omar Lodin', 
-                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                                Text('Major: Computer Science', 
-                                  style: TextStyle(color: Colors.grey)),
-                                    ],
-                              ),
-                          ],
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.account_circle,
+                      size: 50,
+                      color: Colors.pink,
+                    ),
+                    const SizedBox(width: 16),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text(
+                          'Omar Lodin',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
                           ),
-                            ),
+                        ),
+                        Text(
+                          'Major: Computer Science',
+                          style: TextStyle(
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
             ),
-
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-              },
-              child: Text('Created by: Omar Lodin',
-              style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic, color: Colors.grey)
-              
-              )
-              )
-          
+              onPressed: () {},
+              child: const Text(
+                'Created by: Omar Lodin',
+                style: TextStyle(
+                  fontSize: 12,
+                  fontStyle: FontStyle.italic,
+                  color: Colors.grey,
+                ),
+              ),
+            ),
           ],
         ),
       ),
