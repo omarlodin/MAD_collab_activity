@@ -181,7 +181,7 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                          ),
+                           ),
                         ),
                         Text(
                           'Major: Computer Science',
@@ -195,7 +195,21 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Icon(Icons.coffee , size: 80, color: Colors.amber),
+                SizedBox(width: 30),
+                Icon(Icons.self_improvement_rounded , size: 80, color: Colors.deepPurple),
+                SizedBox(width: 30),
+                Icon(Icons.sports_motorsports_sharp , size: 80, color: Colors.red),
+                SizedBox(width: 30),
+                Icon(Icons.sports_kabaddi , size: 80, color: Colors.blue),
+                SizedBox(width: 30),
+              ],
+            ),
+            const SizedBox(height: 30),
             ElevatedButton(
               onPressed: () {},
               child: const Text(
